@@ -1,0 +1,83 @@
+# ----------------------------------
+# Configuration file for spotymenu -
+#-----------------------------------
+
+# Directory where spotymenu stores information (album list, tracklist etc.)
+dir_spotymenu=$HOME/.spotymenu
+
+# Dir that contains the cached tracklists
+dir_tracklist_cache=$dir_spotymenu/tracklist_cache
+
+# File that contains the album list
+file_albumlist=$dir_spotymenu/album_list
+
+# File that contains the list of playlists
+file_playlists=$dir_spotymenu/playlists
+
+# File where the favorites are saved to
+file_favorite_tracks=$dir_spotymenu/favorite_tracks
+
+# Search history
+file_search_history=$dir_spotymenu/search_history
+use_search_history="yes"
+
+# Selected album id saved to this file
+# This way we can quickly access the id for the tracklist command
+file_saved_album_id=$dir_spotymenu/spotymenu_saved_album_id
+
+# Artist and Album Title separator in the displayed list
+# Don't use regex chars as a separator!
+separator=" - "
+
+# Styling
+font="monospace-10"
+list_size="20"
+normal_bg="#181818"
+normal_fg="#ccc"
+selected_bg="#1DB954"
+selected_fg="#181818"
+selected_delete_bg="#c30000"
+selected_delete_fg="#ffffff"
+
+# Show currently playing track info at the top of the list
+# you can hit ENTER on it and it will show the album's tracklist
+# Options: yes or no/empty
+show_playing_track="yes"
+
+# Playing track prefix string and separator line
+playing_track_prefix=">>> Playing: "
+playing_track_separator="-"
+
+# Autoplay selected album (local album list)
+# Options: yes or no/empty
+autoplay_album="yes"
+
+# Use tracklist cache:
+# save tracklists to local files (for cache) and load tracklists from them
+# Recommended! Spotify's API gives too many 'Error 502' on requests
+# If you don't get a tracklist loaded, try again a bit later
+# Options: yes or no/empty
+use_tracklist_cache="yes"
+
+# Extra whitespace for seperating Artist and Title in the tracklist
+tl_separator_whitespace=1
+
+# Separator line character (for the tracklist and the above the album list):
+# use a single character
+sep_line_char="-"
+
+# Separator line's width = number or characters
+# depends on screen resolution and the font size
+# for reference: 170 is for 768 px wide screen and monospace-10 font
+sep_line_width=170
+
+# For Awesome Window Manager: switch to Spotify's tag after selecting or searching
+awm_switch="no" # yes or no/empty
+awm_screen="1"
+awm_tag="4"
+
+# Confirm quit OR quit without warning?
+confirm_quit="yes"
+
+# API limit: results from the Spotify API (currently the max. number can be 50)
+api_limit=50
