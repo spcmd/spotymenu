@@ -290,10 +290,10 @@ elif [[ $input = :info ]] || [[ $input = :i ]]; then
      Artist: $playing_artist\n\
       Title: $playing_title\n\
       Album: $playing_album\n\
-   Album_ID: $playing_albumid\n\
+   Album_ID: spotify:album:$playing_albumid\n\
       Track: $playing_tracknr\n\
      Length: $playing_min_sec\n\
-   Track_ID: $track_id\n\
+   Track_ID: spotify:track:$track_id\n\
       Cover: $playing_arturl\n\
      ==============================================================\
      " | $DMENU)
