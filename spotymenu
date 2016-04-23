@@ -1,17 +1,13 @@
 #!/bin/bash
-#                                      _
-#         ___ _ __   ___ _ __ ___   __| |
-#        / __| '_ \ / __| '_ ` _ \ / _` |
-#        \__ | |_) | (__| | | | | | (_| |
-#        |___| .__/ \___|_| |_| |_|\__,_|
-#             |_|
-#
-#                   spotymenu
-#               Created by: spcmd
-#           http://spcmd.github.io
-#           https://github.com/spcmd
-#           https://gist.github.com/spcmd
-
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
 
 #==================================
 # Load the config
@@ -25,16 +21,31 @@ if [[ -f $CONFIG_home ]]; then
     source $CONFIG_home
 
     # applying spotymenu styles
-    DMENU="dmenu -i -l $list_size -fn $font -nb $normal_bg -nf $normal_fg -sb $selected_bg -sf $selected_fg"
-    DMENU_DELETE="dmenu -i -l $list_size -fn $font -nb $normal_bg -nf $normal_fg -sb $selected_delete_bg -sf $selected_delete_fg"
+    # If X is  running, use dmenu
+    if [[ ! -z $DISPLAY ]]; then
+        DMENU="dmenu -i -l $list_size -fn $font -nb $normal_bg -nf $normal_fg -sb $selected_bg -sf $selected_fg"
+        DMENU_DELETE="dmenu -i -l $list_size -fn $font -nb $normal_bg -nf $normal_fg -sb $selected_delete_bg -sf $selected_delete_fg"
+
+    # If X is not running, use tmenu
+    else
+        DMENU="tmenu -l $tmenu_list_size -p $tmenu_prompt"
+        DMENU_DELETE="tmenu -l $tmenu_list_size -p $tmenu_prompt"
+    fi
 
 elif [[ -f $CONFIG_etc ]]; then
 
     source $CONFIG_etc
 
     # applying spotymenu styles
-    DMENU="dmenu -i -l $list_size -fn $font -nb $normal_bg -nf $normal_fg -sb $selected_bg -sf $selected_fg"
-    DMENU_DELETE="dmenu -i -l $list_size -fn $font -nb $normal_bg -nf $normal_fg -sb $selected_delete_bg -sf $selected_delete_fg"
+    # If X is  running, use dmenu
+    if [[ ! -z $DISPLAY ]]; then
+        DMENU="dmenu -i -l $list_size -fn $font -nb $normal_bg -nf $normal_fg -sb $selected_bg -sf $selected_fg"
+        DMENU_DELETE="dmenu -i -l $list_size -fn $font -nb $normal_bg -nf $normal_fg -sb $selected_delete_bg -sf $selected_delete_fg"
+    # If X is not running, use tmenu
+    else
+        DMENU="tmenu -l $tmenu_list_size -p $tmenu_prompt"
+        DMENU_DELETE="tmenu -l $tmenu_list_size -p $tmenu_prompt"
+    fi
 
 else
     err_msg="spotymenu\nError: can't find any configuration file.\nThe config file has to be: '$CONFIG_home' and/or '$CONFIG_etc'"

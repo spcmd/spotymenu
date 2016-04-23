@@ -68,6 +68,9 @@ After that you might want to copy the default configuration file (`spotymenurc`)
 
 The config file has comments, read them and set it up the way you like.
 
+##### Optional Dependency:
+- tmenu-git ([AUR](https://aur.archlinux.org/packages/tmenu-git) , [github](https://github.com/dhamidi/tmenu) ): for running spotymenu from TTY/tmux without switching back to X
+
 ### Installation (manually)
 
 By default spotymenu resides in `~/.spotymenu`.
@@ -82,6 +85,9 @@ Then create the necessary directories in your HOME directory:
 `mkdir -p ~/.spotymenu/tracklist_cache`
 
 The config file has comments, read them and set it up the way you like.
+
+##### Optional Dependency:
+- tmenu-git ([AUR](https://aur.archlinux.org/packages/tmenu-git) , [github](https://github.com/dhamidi/tmenu) ): for running spotymenu from TTY/tmux without switching back to X
 
 ### Exporting Spotify album list
 If you have a lots of albums, it's better to export it to a local album list. You can export your albums with this script: **[spotify-album-export](https://github.com/spcmd/Scripts/blob/master/spotify-album-export)**. You need a token for this, which you can get it from **[here](https://developer.spotify.com/web-api/console/get-current-user-saved-albums/)**. (Log in, Get a token, check the *read-user-library* option. The token will expire after a certain amount of time).

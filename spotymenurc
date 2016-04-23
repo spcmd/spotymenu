@@ -39,6 +39,10 @@ selected_fg="#181818"
 selected_delete_bg="#c30000"
 selected_delete_fg="#ffffff"
 
+# tmenu settings (optional, requires tmenu: https://github.com/dhamidi/tmenu)
+tmenu_list_size="100"
+tmenu_prompt=">"
+
 # Show currently playing track info at the top of the list
 # you can hit ENTER on it and it will show the album's tracklist
 # Options: yes or no/empty
