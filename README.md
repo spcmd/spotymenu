@@ -124,33 +124,37 @@ It will look like this:
 
 ```
 
-/                 Search track (with or without artist)
+/                   Search track (with or without artist)
 
-/a   /artist      Search artist
+/a   /artist        Search artist
 
-/b   /album       Search album
+/b   /album         Search album
 
-:?                Show search history
+:?                  Show search history
 
-:p   :playlist    Switch to the exported playlists
+:p   :playlist      Switch to the exported playlists
 
-:a   :add         Add current album to the album list
+:a   :add           Add current album to the album list
 
-:d   :delete      Delete album from the album list
+:d   :delete        Delete album from the album list
 
-:t   :tracklist   Show tracklist of the current album
+:t   :tracklist     Show tracklist of the current album
 
-:f   :fav         Show favorite tracks' list
+:f   :fav           Show favorite tracks' list
 
-:fa  :fadd        Add track to the favorites list
+:fa  :fadd          Add track to the favorites list
 
-:fd  :fdel        Delete track from the favorites list
+:fd  :fdel          Delete track from the favorites list
 
-:i   :info        Show detailed information about the played track/album
+:i   :info          Show detailed information about the played track/album
 
-:q   :quit        Quit (close Spotify)
+:q   :quit          Quit (close Spotify)
 
-:h   :help        This help
+spotify:album:<id>  Open album by pasting the album URI from clipboard (Ctrl-Y or Ctrl-y by default in dmenu)
+
+spotify:track:<id>  Open track by pasting the track URI from clipboard (Ctrl-Y or Ctrl-y by default in dmenu)
+
+:h   :help          This help
 
 ```
 

@@ -1,7 +1,7 @@
 # Created by: spcmd [https://github.com/spcmd]
 
 pkgname=spotymenu
-pkgver=1.1
+pkgver=1.2
 pkgrel=1
 arch=('any')
 url='https://github.com/spcmd/spotymenu'

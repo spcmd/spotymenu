@@ -462,26 +462,58 @@ elif [[ $input = :fav* ]] || [[ $input = :f ]]; then
         exit
     fi
 
+# --- Open Spotify album by by pasting the URI from the clipboard (by default it's Ctrl-Y in dmenu)
+elif [[ $input = spotify:album:* ]]; then
+
+    id=$(echo $input | awk -F':' '{print $3}')
+
+    # open the album in spotify
+    if [[ $autoplay_album = "yes" ]]; then
+        track_uri=$(curl -s -X GET "https://api.spotify.com/v1/albums/$id/tracks" | awk -F'"' '/track_number/{i++}i==1 && /uri/ {print $4;exit}')
+        $dbus_stop && $dbus_openuri "string:$track_uri"
+    # else switch to album and don't autoplay
+    else
+        $dbus_openuri "string:spotify:album:$album_id"
+        # awesome wm - switch to spotify's tag
+        if [[ $awm_switch = "yes" ]]; then
+            awm_switch_to_tag
+        fi
+    fi
+
+    # Saved selected album's id to a file, this way we can quickly get the 'album_id' when using the :tracklist command.
+    echo "$id" > $file_saved_album_id
+
+# --- Open Spotify track by by pasting the URI from the clipboard (by default it's Ctrl-Y in dmenu)
+elif [[ $input = spotify:track:* ]]; then
+
+    track_uri=$input
+
+    # Not playing saved album, so remove the saved album_id first
+    rm $file_saved_album_id
+    $dbus_stop && $dbus_openuri "string:$track_uri"
+
 # --- Help ---
 elif [[ $input = :help ]] || [[ $input = :h ]]; then
      echo -e "\
-         Help\n\
-         ======================================================================\n\
-         /                 Search track (with or without artist)\n\
-         /a   /artist      Search artist\n\
-         /b   /album       Search album\n\
-         :?                Show search history\n\
-         :p   :playlist    Switch to the exported playlists\n\
-         :a   :add         Add current album to the album list\n\
-         :d   :delete      Delete album from the album list\n\
-         :t   :tracklist   Show tracklist of the current album\n\
-         :f   :fav         Show favorite tracks' list\n\
-         :fa  :fadd        Add track to the favorites list\n\
-         :fd  :fdel        Delete track from the favorites list\n\
-         :i   :info        Show detailed information about the played track/album\n\
-         :q   :quit        Quit (close Spotify)\n\
-         :h   :help        This help\n\
-         ======================================================================\
+         Help (spotymenu version: 1.2)\n\
+         =============================================================================================================\n\
+         /                   Search track (with or without artist)\n\
+         /a   /artist        Search artist\n\
+         /b   /album         Search album\n\
+         :?                  Show search history\n\
+         :p   :playlist      Switch to the exported playlists\n\
+         :a   :add           Add current album to the album list\n\
+         :d   :delete        Delete album from the album list\n\
+         :t   :tracklist     Show tracklist of the current album\n\
+         :f   :fav           Show favorite tracks' list\n\
+         :fa  :fadd          Add track to the favorites list\n\
+         :fd  :fdel          Delete track from the favorites list\n\
+         :i   :info          Show detailed information about the played track/album\n\
+         :q   :quit          Quit (close Spotify)\n\
+         spotify:album:<id>  Open album by pasting the album URI from clipboard (Ctrl-Y or Ctrl-y by default in dmenu)\n\
+         spotify:track:<id>  Open track by pasting the track URI from clipboard (Ctrl-Y or Ctrl-y by default in dmenu)\n\
+         :h   :help          This help\n\
+         =============================================================================================================\
          " | $DMENU
 
 # --- Load the album list ---
