@@ -69,7 +69,7 @@ After that you might want to copy the default configuration file (`spotymenurc`)
 The config file has comments, read them and set it up the way you like.
 
 ##### Optional Dependency:
-- tmenu-git ([AUR](https://aur.archlinux.org/packages/tmenu-git) , [github](https://github.com/dhamidi/tmenu) ): for running spotymenu from TTY/tmux without switching back to X (**Note:** not fully working: you can list/select/play albums, but other options don't seem to work.)
+- fzf ([Arch Community repo](https://www.archlinux.org/packages/community/x86_64/fzf/) , [github](https://github.com/junegunn/fzf) ): for running spotymenu from TTY/tmux without switching back to X (**Note:** not fully working: you can list/select/play albums, but other options don't seem to work.)
 
 ### Installation (manually)
 
@@ -87,7 +87,7 @@ Then create the necessary directories in your HOME directory:
 The config file has comments, read them and set it up the way you like.
 
 ##### Optional Dependency:
-- tmenu-git ([AUR](https://aur.archlinux.org/packages/tmenu-git) , [github](https://github.com/dhamidi/tmenu) ): for running spotymenu from TTY/tmux without switching back to X (**Note:** not fully working: you can list/select/play albums, but other options don't seem to work.)
+- fzf ([github](https://github.com/junegunn/fzf) ): for running spotymenu from TTY/tmux without switching back to X (**Note:** not fully working: you can list/select/play albums, but other options don't seem to work.)
 
 ### Exporting Spotify album list
 If you have a lots of albums, it's better to export it to a local album list. You can export your albums with this script: **[spotify-album-export](https://github.com/spcmd/Scripts/blob/master/spotify-album-export)**. You need a token for this, which you can get it from **[here](https://developer.spotify.com/web-api/console/get-current-user-saved-albums/)**. (Log in, Get a token, check the *read-user-library* option. The token will expire after a certain amount of time).

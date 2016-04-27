@@ -9,6 +9,9 @@
 # http://spcmd.github.io
 # https://github.com/spcmd
 
+
+version="1.2.1"
+
 #==================================
 # Load the config
 #==================================
@@ -26,10 +29,10 @@ if [[ -f $CONFIG_home ]]; then
         DMENU="dmenu -i -l $list_size -fn $font -nb $normal_bg -nf $normal_fg -sb $selected_bg -sf $selected_fg"
         DMENU_DELETE="dmenu -i -l $list_size -fn $font -nb $normal_bg -nf $normal_fg -sb $selected_delete_bg -sf $selected_delete_fg"
 
-    # If X is not running, use tmenu
+    # If X is not running, use fzf
     else
-        DMENU="tmenu -l $tmenu_list_size -p $tmenu_prompt"
-        DMENU_DELETE="tmenu -l $tmenu_list_size -p $tmenu_prompt"
+        DMENU="fzf $fzf_options --color=bg+:$fzf_selected_bg,fg+:$fzf_selected_fg,prompt:$fzf_prompt,pointer:$fzf_selected_marker,hl:$fzf_matched_characters,hl+:$fzf_matched_characters_selected"
+        # delete and other submenus aren't working currently, so no delete option.
     fi
 
 elif [[ -f $CONFIG_etc ]]; then
@@ -41,10 +44,10 @@ elif [[ -f $CONFIG_etc ]]; then
     if [[ ! -z $DISPLAY ]]; then
         DMENU="dmenu -i -l $list_size -fn $font -nb $normal_bg -nf $normal_fg -sb $selected_bg -sf $selected_fg"
         DMENU_DELETE="dmenu -i -l $list_size -fn $font -nb $normal_bg -nf $normal_fg -sb $selected_delete_bg -sf $selected_delete_fg"
-    # If X is not running, use tmenu
+    # If X is not running, use fzf
     else
-        DMENU="tmenu -l $tmenu_list_size -p $tmenu_prompt"
-        DMENU_DELETE="tmenu -l $tmenu_list_size -p $tmenu_prompt"
+        DMENU="fzf $fzf_options --color=bg+:$fzf_selected_bg,fg+:$fzf_selected_fg,prompt:$fzf_prompt,pointer:$fzf_selected_marker,hl:$fzf_matched_characters,hl+:$fzf_matched_characters_selected"
+        # delete and other submenus aren't working currently, so no delete option.
     fi
 
 else
@@ -495,7 +498,7 @@ elif [[ $input = spotify:track:* ]]; then
 # --- Help ---
 elif [[ $input = :help ]] || [[ $input = :h ]]; then
      echo -e "\
-         Help (spotymenu version: 1.2)\n\
+         Help (spotymenu version: $version)\n\
          =============================================================================================================\n\
          /                   Search track (with or without artist)\n\
          /a   /artist        Search artist\n\

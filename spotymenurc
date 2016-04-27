@@ -39,10 +39,6 @@ selected_fg="#181818"
 selected_delete_bg="#c30000"
 selected_delete_fg="#ffffff"
 
-# tmenu settings (optional, requires tmenu: https://github.com/dhamidi/tmenu)
-tmenu_list_size="100"
-tmenu_prompt=">"
-
 # Show currently playing track info at the top of the list
 # you can hit ENTER on it and it will show the album's tracklist
 # Options: yes or no/empty
@@ -85,3 +81,22 @@ confirm_quit="yes"
 
 # API limit: results from the Spotify API (currently the max. number can be 50)
 api_limit=50
+
+# ------------------------------
+# OPTIONAL / NOT FULLY SUPPORTED
+# ------------------------------
+
+# fzf can be used as a dmenu alternative for cli/tty.
+# Not fully working with spotymenu! Currently only album and track listing/switching is working (no submenus, delete/add/etc.)
+# Can be used on TTY.
+
+# fzf settings (optional, requires fzf (https://github.com/junegunn/fzf)
+# -- colors
+fzf_selected_bg="2"
+fzf_selected_fg="7"
+fzf_selected_marker="7"
+fzf_prompt="7"
+fzf_matched_characters="1"
+fzf_matched_characters_selected="7"
+# -- options
+fzf_options="-e --reverse --bind=tab:down,btab:up"
