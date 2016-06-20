@@ -150,6 +150,8 @@ It will look like this:
 
 :q   :quit          Quit (close Spotify)
 
+:c   :clean         Cleanup the unused tracklist cache files (IDs that are not in the album list)
+
 spotify:album:<id>  Open album by pasting the album URI from clipboard (Ctrl-Y or Ctrl-y by default in dmenu)
 
 spotify:track:<id>  Open track by pasting the track URI from clipboard (Ctrl-Y or Ctrl-y by default in dmenu)

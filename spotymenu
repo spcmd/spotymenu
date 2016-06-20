@@ -10,7 +10,7 @@
 # https://github.com/spcmd
 
 
-version="1.2.2"
+version="1.2.3"
 
 #==================================
 # Load the config
@@ -495,6 +495,30 @@ elif [[ $input = spotify:track:* ]]; then
     rm "$file_saved_album_id"
     $dbus_stop && $dbus_openuri "string:$track_uri"
 
+
+# --- Cleanup the cache: delete the unused cache files from the tracklist_cache directory
+elif [[ $input = :clean ]] || [[ $input = :c ]]; then
+
+    delete_unused_cache=$(echo -e "Delete the unused cache files from the tracklist cache directory?\nyes\nno" | $DMENU_DELETE)
+    if [[ $delete_unused_cache = "yes" ]]; then
+
+        # get all the IDs from the album_list
+        readarray -t arr_track_ids <<< "$(awk -F'|' '{print $NF}' "$file_albumlist")"
+
+        # get all the cached IDs (list of filenames in the tracklist_cache directory)
+        arr_cached_ids=($dir_tracklist_cache/*)
+
+        # delete all the unused cache files (IDs that are not in the album_list anymore)
+        # the `comm` command compares the two sorted lists (arrays) and prints the ununsed cached IDs
+        for del_id in $(comm -23 <(printf '%s\n' "${arr_cached_ids[@]}" | awk -F/ '{print $NF}' | sort) <(printf '%s\n' "${arr_track_ids[@]}" | sort)); do
+            rm "$dir_tracklist_cache"/"$del_id"
+        done
+        echo -e "Done:\nThe unused cache files were deleted.\n" | $DMENU_DELETE
+    else
+       exit
+    fi
+
+
 # --- Help ---
 elif [[ $input = :help ]] || [[ $input = :h ]]; then
      echo -e "\
@@ -513,6 +537,7 @@ elif [[ $input = :help ]] || [[ $input = :h ]]; then
          :fd  :fdel          Delete track from the favorites list\n\
          :i   :info          Show detailed information about the played track/album\n\
          :q   :quit          Quit (close Spotify)\n\
+         :c   :clean         Cleanup the unused tracklist cache files (IDs that are not in the album list)\n\
          spotify:album:<id>  Open album by pasting the album URI from clipboard (Ctrl-Y or Ctrl-y by default in dmenu)\n\
          spotify:track:<id>  Open track by pasting the track URI from clipboard (Ctrl-Y or Ctrl-y by default in dmenu)\n\
          :h   :help          This help\n\
